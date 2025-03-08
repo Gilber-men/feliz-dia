@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Día, Amor</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            background-color: #ffe4e1;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            color: #d63384;
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+        img {
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Feliz Día, Amor! ❤️</h1>
+
+    <div class="image-container">
+        <img src="https://i.pinimg.com/736x/33/9e/c1/339ec17dd125684a3de59ed58846cc2d.jpg" alt="Foto de tu pareja">
+        <div class="text-overlay" id="animated-text"></div>
+    </div>
+
+    <img src="https://i.pinimg.com/736x/a9/1e/8a/a91e8a97757e694b96c515dc00f6dfd7.jpg" alt="Feliz Día">
+
+    <script>
+        const text = "Eres mi razón de sonreír cada día 💖";
+        let index = 0;
+        function typeEffect() {
+            if (index < text.length) {
+                document.getElementById("animated-text").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeEffect, 100); // Velocidad de aparición de letras (100ms)
+            }
+        }
+        window.onload = typeEffect;
+    </script>
+</body>
+</html>
+
