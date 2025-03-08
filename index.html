@@ -12,20 +12,21 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
-            background: url('https://i.pinimg.com/originals/56/34/6c/56346c3e05e0634aa7878a0f8a3be40d.jpg') no-repeat center center/cover;
+            background: url('https://source.unsplash.com/1600x900/?night-sky,stars') no-repeat center center/cover;
             font-family: Arial, sans-serif;
             overflow: hidden;
             position: relative;
         }
         h1 {
-            color: #fff;
+            color: #ffd700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
         }
         .image-container {
             position: relative;
             display: inline-block;
         }
         img {
-            max-width: 250px;
+            max-width: 300px;
             border-radius: 10px;
             margin: 15px 0;
         }
@@ -46,35 +47,38 @@
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            animation: twinkle 2s infinite ease-in-out;
+            animation: twinkle 2s infinite;
         }
         @keyframes twinkle {
-            0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.2); }
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
         }
         .shooting-star {
             position: absolute;
-            width: 2px;
-            height: 10px;
+            width: 3px;
+            height: 15px;
             background: white;
-            animation: shoot 2s linear infinite;
+            opacity: 0;
+            animation: shooting 3s infinite ease-in-out;
         }
-        @keyframes shoot {
-            from { transform: translateX(0) translateY(0); opacity: 1; }
-            to { transform: translateX(100px) translateY(50px); opacity: 0; }
+        @keyframes shooting {
+            0% { transform: translate(0, 0) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(-100px, 100px) rotate(45deg); opacity: 0; }
         }
         .sunflower {
             position: absolute;
-            bottom: 5%;
             width: 80px;
-            animation: sway 3s infinite ease-in-out alternate;
+            bottom: 20px;
+            animation: sway 3s infinite alternate ease-in-out;
         }
         @keyframes sway {
             0% { transform: rotate(-5deg); }
             100% { transform: rotate(5deg); }
         }
-        .sunflower-left { left: 10%; }
-        .sunflower-right { right: 10%; }
+        .left { left: 10%; }
+        .right { right: 10%; }
     </style>
 </head>
 <body>
@@ -84,8 +88,8 @@
         <div class="text-overlay" id="animated-text"></div>
     </div>
     <img src="https://i.pinimg.com/736x/a9/1e/8a/a91e8a97757e694b96c515dc00f6dfd7.jpg" alt="Feliz Día">
-    <img class="sunflower sunflower-left" src="https://i.pinimg.com/originals/13/75/b3/1375b3748b4d71e22158806cc7a6c425.png" alt="Girasol">
-    <img class="sunflower sunflower-right" src="https://i.pinimg.com/originals/13/75/b3/1375b3748b4d71e22158806cc7a6c425.png" alt="Girasol">
+    <img class="sunflower left" src="https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower_from_Silesia2.jpg" alt="Girasol">
+    <img class="sunflower right" src="https://upload.wikimedia.org/wikipedia/commons/4/40/Sunflower_from_Silesia2.jpg" alt="Girasol">
     <script>
         const text = "Eres mi razón de sonreír cada día 💖";
         let index = 0;
@@ -96,25 +100,29 @@
                 setTimeout(typeEffect, 100);
             }
         }
-        window.onload = () => {
+        window.onload = function() {
             typeEffect();
             for (let i = 0; i < 50; i++) {
                 let star = document.createElement("div");
-                star.classList.add("star");
+                star.className = "star";
                 star.style.top = Math.random() * 100 + "vh";
                 star.style.left = Math.random() * 100 + "vw";
                 document.body.appendChild(star);
             }
             for (let i = 0; i < 5; i++) {
                 let shootingStar = document.createElement("div");
-                shootingStar.classList.add("shooting-star");
-                shootingStar.style.top = Math.random() * 100 + "vh";
-                shootingStar.style.left = Math.random() * 100 + "vw";
+                shootingStar.className = "shooting-star";
+                shootingStar.style.top = Math.random() * 50 + "vh";
+                shootingStar.style.left = Math.random() * 80 + "vw";
+                shootingStar.style.animationDelay = Math.random() * 5 + "s";
                 document.body.appendChild(shootingStar);
-                shootingStar.style.animationDuration = (Math.random() * 2 + 1) + "s";
             }
-        };
+            let music = document.createElement("iframe");
+            music.src = "https://www.youtube.com/embed/AfaL4eTIzZ8?autoplay=1&loop=1&playlist=AfaL4eTIzZ8";
+            music.style.display = "none";
+            document.body.appendChild(music);
+        }
     </script>
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/AfaL4eTIzZ8?autoplay=1&loop=1&playlist=AfaL4eTIzZ8" frameborder="0" allow="autoplay"></iframe>
 </body>
 </html>
+
