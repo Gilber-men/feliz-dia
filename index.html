@@ -12,22 +12,20 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
-            background-color: #ffe4e1;
+            background: url('https://i.pinimg.com/originals/56/34/6c/56346c3e05e0634aa7878a0f8a3be40d.jpg') no-repeat center center/cover;
             font-family: Arial, sans-serif;
             overflow: hidden;
             position: relative;
         }
         h1 {
-            color: #d63384;
-            position: absolute;
-            top: 10%;
+            color: #fff;
         }
         .image-container {
             position: relative;
             display: inline-block;
         }
         img {
-            max-width: 300px;
+            max-width: 250px;
             border-radius: 10px;
             margin: 15px 0;
         }
@@ -42,60 +40,52 @@
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
             white-space: nowrap;
         }
-        .stars {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            top: 0;
-            left: 0;
-        }
         .star {
             position: absolute;
             background: white;
             width: 5px;
             height: 5px;
             border-radius: 50%;
-            animation: twinkle 1.5s infinite alternate;
+            animation: twinkle 2s infinite ease-in-out;
         }
         @keyframes twinkle {
-            0% { opacity: 0.2; }
-            100% { opacity: 1; }
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background: white;
+            animation: shoot 2s linear infinite;
+        }
+        @keyframes shoot {
+            from { transform: translateX(0) translateY(0); opacity: 1; }
+            to { transform: translateX(100px) translateY(50px); opacity: 0; }
         }
         .sunflower {
             position: absolute;
             bottom: 5%;
             width: 80px;
-            animation: sway 2s infinite alternate;
-        }
-        .sunflower-left {
-            left: 5%;
-        }
-        .sunflower-right {
-            right: 5%;
+            animation: sway 3s infinite ease-in-out alternate;
         }
         @keyframes sway {
             0% { transform: rotate(-5deg); }
             100% { transform: rotate(5deg); }
         }
+        .sunflower-left { left: 10%; }
+        .sunflower-right { right: 10%; }
     </style>
 </head>
 <body>
     <h1>¡Feliz Día, Amor! ❤️</h1>
-    <div class="stars"></div>
     <div class="image-container">
         <img src="https://i.pinimg.com/736x/33/9e/c1/339ec17dd125684a3de59ed58846cc2d.jpg" alt="Foto de tu pareja">
         <div class="text-overlay" id="animated-text"></div>
     </div>
     <img src="https://i.pinimg.com/736x/a9/1e/8a/a91e8a97757e694b96c515dc00f6dfd7.jpg" alt="Feliz Día">
-    <img src="https://cdn.pixabay.com/photo/2017/07/24/18/40/sunflower-2534494_960_720.png" class="sunflower sunflower-left" alt="Girasol">
-    <img src="https://cdn.pixabay.com/photo/2017/07/24/18/40/sunflower-2534494_960_720.png" class="sunflower sunflower-right" alt="Girasol">
-
-    <audio autoplay loop>
-        <source src="https://www.youtube.com/embed/AfaL4eTIzZ8" type="audio/mpeg">
-        Tu navegador no soporta audio HTML5.
-    </audio>
-
+    <img class="sunflower sunflower-left" src="https://i.pinimg.com/originals/13/75/b3/1375b3748b4d71e22158806cc7a6c425.png" alt="Girasol">
+    <img class="sunflower sunflower-right" src="https://i.pinimg.com/originals/13/75/b3/1375b3748b4d71e22158806cc7a6c425.png" alt="Girasol">
     <script>
         const text = "Eres mi razón de sonreír cada día 💖";
         let index = 0;
@@ -106,22 +96,25 @@
                 setTimeout(typeEffect, 100);
             }
         }
-        window.onload = function() {
+        window.onload = () => {
             typeEffect();
-            createStars();
-        };
-        function createStars() {
-            const starsContainer = document.querySelector(".stars");
             for (let i = 0; i < 50; i++) {
                 let star = document.createElement("div");
-                star.className = "star";
-                star.style.top = Math.random() * 100 + "%";
-                star.style.left = Math.random() * 100 + "%";
-                star.style.animationDuration = (Math.random() * 2 + 1) + "s";
-                starsContainer.appendChild(star);
+                star.classList.add("star");
+                star.style.top = Math.random() * 100 + "vh";
+                star.style.left = Math.random() * 100 + "vw";
+                document.body.appendChild(star);
             }
-        }
+            for (let i = 0; i < 5; i++) {
+                let shootingStar = document.createElement("div");
+                shootingStar.classList.add("shooting-star");
+                shootingStar.style.top = Math.random() * 100 + "vh";
+                shootingStar.style.left = Math.random() * 100 + "vw";
+                document.body.appendChild(shootingStar);
+                shootingStar.style.animationDuration = (Math.random() * 2 + 1) + "s";
+            }
+        };
     </script>
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/AfaL4eTIzZ8?autoplay=1&loop=1&playlist=AfaL4eTIzZ8" frameborder="0" allow="autoplay"></iframe>
 </body>
 </html>
-
