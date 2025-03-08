@@ -12,15 +12,15 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
-            background: radial-gradient(circle, #0b1a40, #000);
+            background-color: #ffe4e1;
             font-family: Arial, sans-serif;
             overflow: hidden;
             position: relative;
         }
         h1 {
-            color: #ff99cc;
-            font-size: 2rem;
-            z-index: 2;
+            color: #d63384;
+            position: absolute;
+            top: 10%;
         }
         .image-container {
             position: relative;
@@ -30,7 +30,6 @@
             max-width: 300px;
             border-radius: 10px;
             margin: 15px 0;
-            z-index: 2;
         }
         .text-overlay {
             position: absolute;
@@ -42,53 +41,61 @@
             font-weight: bold;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
             white-space: nowrap;
-            z-index: 2;
         }
         .stars {
             position: absolute;
             width: 100%;
             height: 100%;
             overflow: hidden;
+            top: 0;
+            left: 0;
         }
         .star {
             position: absolute;
             background: white;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
-            opacity: 0.8;
-            animation: twinkle 2s infinite alternate;
+            animation: twinkle 1.5s infinite alternate;
         }
         @keyframes twinkle {
-            from { opacity: 0.2; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1.2); }
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
         }
-        .aurora {
+        .sunflower {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-            animation: aurora-move 5s infinite alternate;
+            bottom: 5%;
+            width: 80px;
+            animation: sway 2s infinite alternate;
         }
-        @keyframes aurora-move {
-            from { transform: translateY(-10px); }
-            to { transform: translateY(10px); }
+        .sunflower-left {
+            left: 5%;
+        }
+        .sunflower-right {
+            right: 5%;
+        }
+        @keyframes sway {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
         }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="aurora"></div>
-    
     <h1>¡Feliz Día, Amor! ❤️</h1>
-    
+    <div class="stars"></div>
     <div class="image-container">
         <img src="https://i.pinimg.com/736x/33/9e/c1/339ec17dd125684a3de59ed58846cc2d.jpg" alt="Foto de tu pareja">
         <div class="text-overlay" id="animated-text"></div>
     </div>
-    
     <img src="https://i.pinimg.com/736x/a9/1e/8a/a91e8a97757e694b96c515dc00f6dfd7.jpg" alt="Feliz Día">
-    
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID?autoplay=1&loop=1&playlist=YOUTUBE_VIDEO_ID" frameborder="0" allow="autoplay"></iframe>
-    
+    <img src="https://cdn.pixabay.com/photo/2017/07/24/18/40/sunflower-2534494_960_720.png" class="sunflower sunflower-left" alt="Girasol">
+    <img src="https://cdn.pixabay.com/photo/2017/07/24/18/40/sunflower-2534494_960_720.png" class="sunflower sunflower-right" alt="Girasol">
+
+    <audio autoplay loop>
+        <source src="https://www.youtube.com/embed/AfaL4eTIzZ8" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+    </audio>
+
     <script>
         const text = "Eres mi razón de sonreír cada día 💖";
         let index = 0;
@@ -101,21 +108,17 @@
         }
         window.onload = function() {
             typeEffect();
-            createStars(50);
+            createStars();
         };
-        
-        function createStars(num) {
-            const container = document.querySelector(".stars");
-            for (let i = 0; i < num; i++) {
+        function createStars() {
+            const starsContainer = document.querySelector(".stars");
+            for (let i = 0; i < 50; i++) {
                 let star = document.createElement("div");
                 star.className = "star";
-                let size = Math.random() * 5 + 2;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.top = `${Math.random() * 100}vh`;
-                star.style.left = `${Math.random() * 100}vw`;
-                star.style.animationDuration = `${Math.random() * 3 + 1}s`;
-                container.appendChild(star);
+                star.style.top = Math.random() * 100 + "%";
+                star.style.left = Math.random() * 100 + "%";
+                star.style.animationDuration = (Math.random() * 2 + 1) + "s";
+                starsContainer.appendChild(star);
             }
         }
     </script>
