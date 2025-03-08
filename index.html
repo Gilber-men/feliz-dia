@@ -12,19 +12,15 @@
             justify-content: center;
             height: 100vh;
             text-align: center;
-            background: linear-gradient(45deg, #001f3f, #22004b, #002b36);
-            background-size: 400% 400%;
-            animation: aurora 10s infinite alternate;
+            background: radial-gradient(circle, #0b1a40, #000);
             font-family: Arial, sans-serif;
             overflow: hidden;
             position: relative;
         }
-        @keyframes aurora {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
         h1 {
-            color: #ff66b2;
+            color: #ff99cc;
+            font-size: 2rem;
+            z-index: 2;
         }
         .image-container {
             position: relative;
@@ -34,6 +30,7 @@
             max-width: 300px;
             border-radius: 10px;
             margin: 15px 0;
+            z-index: 2;
         }
         .text-overlay {
             position: absolute;
@@ -45,6 +42,7 @@
             font-weight: bold;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
             white-space: nowrap;
+            z-index: 2;
         }
         .stars {
             position: absolute;
@@ -54,31 +52,44 @@
         }
         .star {
             position: absolute;
-            background-color: white;
-            width: 3px;
-            height: 3px;
+            background: white;
             border-radius: 50%;
-            opacity: 0;
-            animation: sparkle 2s infinite ease-in-out;
+            opacity: 0.8;
+            animation: twinkle 2s infinite alternate;
         }
-        @keyframes sparkle {
-            0% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.2); }
-            100% { opacity: 0; transform: scale(0.5); }
+        @keyframes twinkle {
+            from { opacity: 0.2; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1.2); }
+        }
+        .aurora {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+            animation: aurora-move 5s infinite alternate;
+        }
+        @keyframes aurora-move {
+            from { transform: translateY(-10px); }
+            to { transform: translateY(10px); }
         }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
+    <div class="stars"></div>
+    <div class="aurora"></div>
+    
     <h1>¡Feliz Día, Amor! ❤️</h1>
+    
     <div class="image-container">
         <img src="https://i.pinimg.com/736x/33/9e/c1/339ec17dd125684a3de59ed58846cc2d.jpg" alt="Foto de tu pareja">
         <div class="text-overlay" id="animated-text"></div>
     </div>
+    
     <img src="https://i.pinimg.com/736x/a9/1e/8a/a91e8a97757e694b96c515dc00f6dfd7.jpg" alt="Feliz Día">
     
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID?autoplay=1&loop=1&playlist=YOUTUBE_VIDEO_ID" frameborder="0" allow="autoplay"></iframe>
+    
     <script>
-        // Efecto de texto animado
         const text = "Eres mi razón de sonreír cada día 💖";
         let index = 0;
         function typeEffect() {
@@ -88,24 +99,26 @@
                 setTimeout(typeEffect, 100);
             }
         }
-        window.onload = typeEffect;
-
-        // Generar estrellas aleatorias
-        function createStars() {
-            const starsContainer = document.getElementById("stars");
-            for (let i = 0; i < 100; i++) {
+        window.onload = function() {
+            typeEffect();
+            createStars(50);
+        };
+        
+        function createStars(num) {
+            const container = document.querySelector(".stars");
+            for (let i = 0; i < num; i++) {
                 let star = document.createElement("div");
-                star.classList.add("star");
-                let x = Math.random() * window.innerWidth;
-                let y = Math.random() * window.innerHeight;
-                let delay = Math.random() * 2;
-                star.style.left = `${x}px`;
-                star.style.top = `${y}px`;
-                star.style.animationDelay = `${delay}s`;
-                starsContainer.appendChild(star);
+                star.className = "star";
+                let size = Math.random() * 5 + 2;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.animationDuration = `${Math.random() * 3 + 1}s`;
+                container.appendChild(star);
             }
         }
-        createStars();
     </script>
 </body>
 </html>
+
